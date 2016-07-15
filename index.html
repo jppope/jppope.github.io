@@ -1,0 +1,184 @@
+<!doctype html>
+<html class="no-js" lang="en-us">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="apple-touch-icon" href="#">
+		<!-- CSS files -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.0.1/css/foundation.min.css">
+        <link href='https://fonts.googleapis.com/css?family=Raleway:400,300,800' rel='stylesheet' type='text/css'>      
+        <link rel="stylesheet" href="css/main.css">
+        <!-- /end CSS-->
+        <script src="js/vendor/modernizr-2.8.3.min.js"></script>
+    </head>
+    <body>
+        <div class="container">
+            <div class="row">
+                <div class="columns medium-10 medium-offset-1">
+            <div class="callout">
+                <h4>Sales Career | Entrepreneurship | Engineering | Other </h4>
+            </div>
+            <p>Note: these are highlights, not daily activities</p>
+            <h2>Design</h2>
+            <ul>
+                <li>05/2016 | Typography</li>
+                <li>05/2016 | 2020 fix</li>
+                <li>03/2016 | Dedicated Conversion Page Design</li>
+                <li>03/2016 | parcel-audit-/sign-up Design</li>
+                <li>02/2016 | Blog Redesign</li>
+                <li>02/2016 | 404 page design/li>
+            </ul>
+
+            <h2>Front End Engineering</h2>
+            <ul>
+                <li>05/2016 | Typography</li>
+                <li>11/2015 | lojistic.com/give</li>
+                <li>05/2016 | lojistic.com/Careers</li>
+                <li>04/2016 | lojistic.com/readypay</li>
+                <li>04/2016 | lojistic.com Vendor Payment Integration</li>
+                <li>03/2016 | lojistic.com/parcel-audit-/sign-up</li>
+                <li>02/2016 | Blog Redesign</li>
+                <li>02/2016 | lojistic.com/Parcel-Freight-Audit/price</li>
+                <li>02/2016 | Social Sharing Script</li>
+                <li>02/2016 | Videos Page/ YouTube Api</li>
+            </ul>
+
+            <h2>Back End Engineering</h2>
+            <ul>
+                <li>05/2016 | A/B Testing Suite</li>
+                <li>05/2016 | lojistic.com/Careers</li>
+                <li>04/2016 | set up unit testing</li>
+                <li>04/2016 | Built Design Testing Nightmare Crawler</li>
+                <li>03/2016 | Documentation -> created future protocol</li>
+            </ul>
+
+
+
+            <pre>
+            <?php
+
+            namespace App\Http\Controllers;
+
+            use Illuminate\Http\Response;
+            use Illuminate\Http\Request;
+            use Illuminate\Cookie\CookieJar;
+            use App\Test;
+            use Cookie;
+            use App\TestRecord;
+            use Carbon\Carbon;
+            use App\Http\Requests;
+            use App\Helpers\Testing;
+
+            class TestController extends Controller
+            {
+                /**
+                 * Method for conduction an A/B Test
+                 *
+                 * @method theAlphaBetaTest
+                 *
+                 * @param Request $request Request stuff
+                 *
+                 * @return View
+                 */
+                public function theAlphaBetaTest(Request $request)
+                {
+                    $cookie = $request->cookie('test');
+
+                    if ($cookie != null) {
+                        $theTest = Testing::withExistingCookie(
+                            $theRequest = $request,
+                            $testId = 2,
+                            $variable1 = 'lets-do-this-button',
+                            $variable2 = 'Find-Out-More'
+                        );
+                        return view(
+                            'pages.carrier-contract-negotiation',
+                            compact('theTest')
+                        );
+
+                    } else {
+                        $theTest = Testing::withoutExistingCookie(
+                            $testId = 2,
+                            $variable1 = 'lets-do-this-button',
+                            $variable2 = 'Find-Out-More'
+                        );
+                        $uuid = $theTest->uuid;
+                        return response(
+                            view(
+                                'pages.carrier-contract-negotiation',
+                                compact('theTest')
+                            )
+                        )->cookie('test', $uuid, 131400);
+                    }
+                }
+
+                /**
+                 * Literally the same thing as the function above-> needed if you do a multi
+                 * page test
+                 * @param Request $request
+                 * @return $this|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
+                 */
+                public function theAlphaBetaTestPageTwo(Request $request)
+                {
+                    $cookie = $request->cookie('test');
+                    if ($cookie != null) {
+                        $theTest = Testing::withExistingCookie(
+                            $theRequest = $request,
+                            $testId = 2,
+                            $variable1 = 'lets-do-this-button',
+                            $variable2 = 'Find-Out-More'
+                        );
+                        return view(
+                            'pages/carrier-contract-negotiation/sign-up',
+                            compact('theTest')
+                        );
+
+                    } else {
+                        $theTest = Testing::withoutExistingCookie(
+                            $testId = 2,
+                            $variable1 = 'lets-do-this-button',
+                            $variable2 = 'Find-Out-More'
+                        );
+                        $uuid = $theTest->uuid;
+                        return response(
+                            view(
+                                'pages/carrier-contract-negotiation/sign-up',
+                                compact('theTest')
+                            )
+                        )->cookie('test', $uuid, 131400);
+                    }
+                }
+                /**
+                 * Conversion for A/B Test
+                 * @param Request $request
+                 */
+                public function alphaBetaConversion(Request $request)
+                {
+                    $uuid = $request->uuid;
+                    $testId = 2;
+                    $now = Carbon::now();
+                    TestRecord::where('tests_id', '=', $testId)
+                        ->where('uuid', '=', $uuid)->first()->update(['conversion_date' => $now]);
+                    //Todo: make sure that SamRam has conversion method up and working
+                    //  Conversion::storeFormSubmission($request);
+                    return view('pages.thank-you');
+                }
+
+            }
+            </pre>
+        </div>
+    </div>
+</div>
+
+
+
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/foundation-essential/5.5.1/js/vendor/jquery.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.0.1/js/foundation.min.js"></script>
+        <script src="js/main.js"></script>
+    </body>
+</html>

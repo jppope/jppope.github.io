@@ -28,7 +28,6 @@ a {
 .menu-header {
   border-bottom: 1px solid #2a2d2f;
   padding: 20px 0 20px 60px;
-  background: url('../assets/github.png') no-repeat 15px 15px;
   background-size: 32px;
 }
 
@@ -89,7 +88,6 @@ a {
   color: #4B5;
   font-weight: 400;
   padding-top: 82px;
-  background: url('../assets/mango-logo.png') no-repeat center top;
 }
 
 .subtitle {
@@ -143,7 +141,6 @@ a {
  * iPhone
  */
 .iphone {
-  background: url('../assets/iphone5.png') no-repeat;
   position: relative;
   margin: 0 auto;
   width: 298px;
@@ -172,14 +169,12 @@ a {
   top: 12px;
   left: 12px;
   outline:none;
-  background: url('../assets/menu.png') no-repeat left center;
 }
 
 .tooltip {
   font-size: 20px;
   line-height: 19px;
   display: inline-block;
-  background: #4B5 url('../assets/happy.png') no-repeat 135px 15px;
   color: #fff;
   padding: 10px 45px 10px 20px;
   border-radius: 4px;
@@ -430,5 +425,16 @@ pre {
 }
 pre code {
 	padding: 10px;
-	color: #333;
+	color: #fff;
+}
+
+/* Modal */
+.modal-content{
+	color:white;
+}
+ #btn-close-modal {
+    width:100%;
+    text-align: center;
+    cursor:pointer;
+    color:#fff;
 }
